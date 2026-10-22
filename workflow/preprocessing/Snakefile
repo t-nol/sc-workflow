@@ -1,0 +1,49 @@
+from utils.ModuleConfig import ModuleConfig
+from pathlib import Path
+
+mcfg = ModuleConfig(
+    module_name="preprocessing",
+    global_config=config
+)
+
+# add integration controls to integration methods list when benchmarking
+int_controls_nolabel = [
+    "batchwise-pca",
+    "shuffle-per-batch",
+]
+int_controls_label = [
+    "perfect-embed-label",
+    "perfect-embed-label-jitter",
+    "shuffle-per-label",
+]
+
+if mcfg.config["integration"]["benchmark"]:
+    methods = mcfg.config["integration"]["methods"]
+    methods.update({m: {} for m in int_controls_nolabel}) # add no-label controls
+    if mcfg.config["integration"]["label_key"] is not None: # add label-based controls
+        methods.update({m: {} for m in int_controls_label})
+
+#import pprint
+#print("\n\n PREPROCESSING CONFIG :")
+#pprint.pp(mcfg.__dict__)
+
+include: "rules/preprocessing.smk"
+include: "rules/integration_python.smk"
+include: "rules/integration_r.smk"
+include: "rules/integration_controls.smk"
+include: "rules/integration_benchmark.smk"
+include: "rules/report.smk"
+
+
+rule all:
+    input:
+        expand(
+            rules.report_per_integration.output,
+            filename=mcfg.input_files,
+            integration=mcfg.config["integration"]["methods"],
+            feature_space=mcfg.config["integration"]["feature_space"]
+        ),
+        expand(
+            rules.report_integration_benchmark.output,
+            filename=mcfg.input_files
+        ) if mcfg.config["integration"]["benchmark"] else [],

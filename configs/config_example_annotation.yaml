@@ -1,0 +1,14 @@
+output_dir: /scratch/nautilus/users/boughaba-s-1@univ-nantes.fr/alternance/DATA/test_annot
+
+# input configuration
+input:  
+  preprocessing: /scratch/nautilus/users/boughaba-s-1@univ-nantes.fr/alternance/DATA/elise_merged_post_annot_gene_index.h5ad
+  annotation: preprocessing
+
+# module specific config
+annotation:
+  atlas:
+      path: /scratch/nautilus/users/boughaba-s-1@univ-nantes.fr/alternance/DATA/organoid_atlas.h5ad
+      cell_type_column: level_2
+  
+  prepro_combos: ["hvg_noint"]

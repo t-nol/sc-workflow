@@ -1,0 +1,15 @@
+output_dir: /home/theo-n/Documents/projects/theo_parse_sc_vs_sn_2025/data/sc-process-output-example
+
+# input configuration
+input:
+  qc: /home/theo-n/Documents/projects/theo_parse_sc_vs_sn_2025/data/sc_raw_h5ad/split/
+  preprocessing: qc
+  clustering: preprocessing
+
+#module specific configuration
+clustering:
+  user_markers: 
+    - /home/theo-n/Documents/projects/theo_parse_sc_vs_sn_2025/ressources/general_markers.yaml
+    - /home/theo-n/Documents/projects/theo_parse_sc_vs_sn_2025/ressources/detailed_markers.yaml
+    - /home/theo-n/Documents/projects/theo_parse_sc_vs_sn_2025/ressources/elise_top10_markers.yaml
+    - /home/theo-n/Documents/projects/theo_parse_sc_vs_sn_2025/ressources/heoca_markers.yaml

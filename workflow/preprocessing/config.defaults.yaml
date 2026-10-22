@@ -1,0 +1,42 @@
+preprocessing:
+  
+  batch_key: null #batch to preprocess separately if int_method no int, and/or for integration methods needing split preprocessing upstream
+
+  normalize: 
+    method: shifted_logarithm 
+  
+  cell_phase_scoring:
+    method: scanpy # for now only using scanpy + gene lists below
+    s_genes_file: regev_lab_human_cell_cycle_genes_s.txt #files in resources section
+    g2m_genes_file: regev_lab_human_cell_cycle_genes_g2m.txt
+
+  feature_selection: 
+    method: highly_variable_genes 
+    n_top_genes: 2500 
+    batch_aware: False #True when technical replicates/False when different conditions to avoid loosing meaningful biology. uses batch_key when True
+  
+  pca: 
+    n_comps: 50 
+    regress_cell_cycle: False
+  
+  knn: 
+    n_neighbors: 15
+    #Larger values result in more global views of the manifold, 
+    #while smaller values result in more local data being preserved. 
+    #In general values should be in the range 2 to 100.  
+  
+  projection: 
+    methods: ['umap'] # can also do 'diffmap'
+    do_3d: False 
+    extra_keys: [] #list of obs or vars to color plots by in report
+
+  integration:
+    label_key: null #label key to use to correct integrations and get label dependent scib metrics
+    feature_space: ['hvg'] #'full' or 'hvg', wether to subset features to highly variable genes or not
+    benchmark: False #wether to compare integration results using the scIB package
+    methods:
+      noint:
+        #per_batch: False
+        #ideally want to add a per_batch param to noint to split preprocessing. 
+        #should be True for any integration methods needing upstream preprocessing split per batch.
+        #used checkpoints before but that results in keeping all intermediate zarr which adds up fast.

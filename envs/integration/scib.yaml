@@ -1,0 +1,14 @@
+name: scib
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python
+  - anndata
+  - zarr
+  - rpy2
+  - r-remotes
+  - anndata2ri<2.0
+  - pip
+  - pip:
+    - scib  #installing via pip, anaconda scib dependencies require older anndata version not compatible with read_zarr()

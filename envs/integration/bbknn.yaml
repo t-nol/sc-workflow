@@ -1,0 +1,9 @@
+name: bbknn
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - scanpy
+  - anndata
+  - zarr
+  - bbknn

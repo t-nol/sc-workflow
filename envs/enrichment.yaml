@@ -1,0 +1,12 @@
+name: clustering
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - scanpy
+  - anndata
+  - zarr
+  - scikit-learn
+  - gprofiler-official
+  - gseapy
+  

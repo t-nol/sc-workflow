@@ -1,0 +1,48 @@
+output_dir: /home/theo-n/Documents/projects/theo_parse_sc_vs_sn_2025/data/sc-process-output-example-integration
+
+# input configuration
+input:  
+  qc: /home/theo-n/Documents/projects/theo_parse_sc_vs_sn_2025/data/sc_raw_h5ad/d28_organoids.h5ad
+  preprocessing: qc
+  clustering: preprocessing
+
+#module specific configuration
+qc:
+  batch_key: type
+
+preprocessing:
+  batch_key: type
+  projection: 
+    do_3d: True 
+    extra_keys: ['sample', 'transgene','EPCAM','COL1A2','SOX10','ELAVL4','PTPRC']
+  integration:
+    #label_key: 'split_annot'
+    benchmark: True
+    methods:
+      # python methods
+      mnn:
+      combat:
+        covariates: null 
+        #adata.obs column for meaningful biological information to keep. 
+        #label_key is automatically added here when given
+        #default is None for easier handling in int_combat.py
+      scvi:
+      #scanvi: #needs a label_key
+      harmony:     
+      scanorama:
+        n_neighbors: 20 #default is 20, number of neighbors used for matching between batches
+      bbknn:
+      concord:
+      # r methods
+      css:
+        correlation: spearman 
+        #spearman is better for continuous data, pearson for discrete cell type compositions
+        #this changes automatically spectrum_type to z-transformation or kernel probability normalization respectively. 
+      cca:
+      rpca:
+
+clustering:
+  prepro_combos: ["hvg_harmony"] #selected feature space + _ + integration method combos from preprocessing module
+  user_markers: 
+    - /home/theo-n/Documents/projects/theo_parse_sc_vs_sn_2025/ressources/general_markers.yaml
+    - /home/theo-n/Documents/projects/theo_parse_sc_vs_sn_2025/ressources/detailed_markers.yaml

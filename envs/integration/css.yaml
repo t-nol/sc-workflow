@@ -1,0 +1,24 @@
+name: css
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python
+  - numpy
+  - scipy
+  - anndata
+  - zarr
+  - r-base
+  - r-matrix
+  - r-data.table
+  - conda-forge::r-reticulate
+  - r-devtools
+  - r-biocmanager
+  - r-seurat
+  - r-optparse
+  - r-rcppcnpy
+  - bioconductor-zellkonverter
+  - bioconductor-singlecellexperiment
+  - bioconductor-summarizedexperiment
+  - bioconductor-biocgenerics
+  - bioconductor-rarr

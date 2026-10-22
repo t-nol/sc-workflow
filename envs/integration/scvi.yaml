@@ -1,0 +1,12 @@
+name: scvi
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - scanpy
+  - anndata
+  - zarr
+  - scikit-misc
+  - scvi 
+  - scvi-tools
+  

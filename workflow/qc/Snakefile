@@ -1,0 +1,27 @@
+from utils.ModuleConfig import ModuleConfig
+from pathlib import Path
+
+mcfg = ModuleConfig(
+    module_name="qc",
+    global_config=config
+)
+
+#import pprint
+#print("\n\n QC CONFIG :")
+#pprint.pp(mcfg.__dict__)
+
+include: "rules/metrics.smk"
+include: "rules/doublets.smk"
+include: "rules/filtering.smk"
+include: "rules/report.smk"
+
+rule all:
+    input:
+        expand(
+            rules.filtering.output,
+            filename=mcfg.input_files,
+        ),
+        expand(
+            rules.report.output,
+            filename=mcfg.input_files,
+        )

@@ -1,0 +1,7 @@
+#gitignore
+
+.snakemake
+save/
+__pycache__/
+*.pyc
+*.pyo

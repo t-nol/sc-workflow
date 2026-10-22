@@ -1,0 +1,34 @@
+annotation:
+  # information on query dataset
+  query:
+    file_format: h5ad  # h5ad or zarr
+    norm_layer: norm_counts
+    gene_name_column: gene_name
+    use_existing_umap: true
+    umap_key: X_umap_2D
+    
+  prepro_combos: null # list of featurespace "_" integration methods combos to use if output of preprocessing module
+  
+  # information on reference atlas
+  atlas:
+    path: null #path to file with reference atlas annotated
+    file_format: h5ad  # h5ad or zarr
+    gene_id_column: gene_ids
+    cell_type_column: null
+  
+  # tool
+  celltypist:
+    train:
+      feature_selection: true # if True : trains the model on top_genes for each celltypes. Else trains on all genes.
+      top_genes: 300 # number of features per cell_type if feature_selection if True
+      check_expression: false # Wether the atlas expression matrix is log normalized 
+    annotate:
+      majority_voting: true # Wether to use majority voting
+      cluster_key: null # If majority_voting is True, Adata.obs key where clustering is stored. If None (null) will run clustering by itself.
+    dotplot:
+      enable: false
+      use_as_prediction: celltypist_labels
+      use_as_reference: leiden
+      filter_prediction: 0.0
+      swap_axes: false
+      title: "CellTypist label transfer"

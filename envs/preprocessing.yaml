@@ -1,0 +1,10 @@
+name: preprocessing
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - scanpy
+  - anndata>=0.12.9
+  - zarr
+  - scikit-misc
+  - umap-learn

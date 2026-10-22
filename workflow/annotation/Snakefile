@@ -1,0 +1,18 @@
+from utils.ModuleConfig import ModuleConfig
+
+mcfg = ModuleConfig(
+    module_name="annotation",
+    global_config=config,
+)
+
+include: "rules/convert.smk"
+include: "rules/train_model.smk"
+include: "rules/annotate.smk"
+include: "rules/plot.smk"
+
+rule all:
+    input:
+        expand(
+            rules.plot_celltypist_umap.output,
+            filename=mcfg.input_files
+        )

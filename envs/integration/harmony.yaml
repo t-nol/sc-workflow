@@ -1,0 +1,9 @@
+name: harmony
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - scanpy
+  - anndata
+  - zarr
+  - harmonypy<0.2.0

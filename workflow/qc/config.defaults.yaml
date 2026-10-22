@@ -1,0 +1,12 @@
+qc:
+  filtering:
+    n_counts_max: 10000
+    n_counts_min: 200
+    n_genes_min: 100
+    n_cells_min: 5
+    percent_mito_max: 10
+    use_mad: False
+  doublets:
+    tool: ['scrublet']
+    filter_out: null #null to keep all cells; 'all' or 'any' to either remove cells markeds as doublet by all tools used, or by at least one (any)
+  batch_key: null #adata.obs column to split dataset into batches for qc

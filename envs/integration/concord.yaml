@@ -1,0 +1,12 @@
+name: concord
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - scanpy
+  - anndata
+  - zarr
+  - torchvision 
+  - torchaudio
+  - pip:
+    - concord-sc

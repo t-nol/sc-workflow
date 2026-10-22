@@ -1,0 +1,23 @@
+name: reports
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python
+  - scanpy
+  - anndata
+  - numpy     
+  - pandas     
+  - matplotlib
+  - seaborn
+  - upsetplot
+  - pypdf2
+  - plotly
+  - gprofiler-official
+  - bioservices     # optional, for Reactome pathway queries
+  - statsmodels     # optional, useful for additional statistical plotting
+  - scikit-learn    # optional, for any clustering/scaling in enrichment plots
+  - pip:
+    - adjustText
+    - pyclustree
+

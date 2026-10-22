@@ -1,0 +1,8 @@
+name: mnn
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - scanpy
+  - anndata
+  - zarr

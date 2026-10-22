@@ -1,0 +1,38 @@
+from utils.ModuleConfig import ModuleConfig
+from pathlib import Path
+
+mcfg = ModuleConfig(
+    module_name = "clustering",
+    global_config = config,
+)
+
+#import pprint
+#print("\n\n CLUSTERING CONFIG :")
+#pprint.pp(mcfg.__dict__)
+
+#----------------------
+# Generate wildcard values from config
+#----------------------
+ALGO = mcfg.config['algorithm']
+MAIN_RESOLUTIONS = mcfg.config['res']
+SUB_RESOLUTIONS = mcfg.config['sub_res']
+
+USER_MARKERS = mcfg.config['user_markers']
+if USER_MARKERS is not None:
+    MARKER_STEMS = {
+        Path(p).stem: Path(p)
+        for p in USER_MARKERS
+    }
+
+#----------------------
+# Rule all
+#----------------------
+include: "rules/clustering.smk"
+include: "rules/cluster_markers.smk"
+include: "rules/enrichment.smk"
+include: "rules/plot.smk"
+
+
+rule all:
+    input:
+        rules.plot_all.input,

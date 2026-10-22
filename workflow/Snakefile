@@ -1,0 +1,27 @@
+from snakemake.utils import min_version
+
+min_version("9.0")
+
+config['modules'] = [m for m, v in config.get("input", {}).items() if v is not None]
+
+# load needed modules and prepare for rule all input
+module_all_rules = {}
+for module_name,alias in zip(config['modules'],[m + "_" for m in config['modules']]):
+    module:
+        name: module_name
+        snakefile: f"{module_name}/Snakefile"
+        config: config
+
+    use rule * from module_name as alias*
+
+    module_all_rules[module_name] = getattr(rules, f"{module_name}_all").input
+
+all_inputs = []
+for mod in config['modules']:
+    all_inputs.extend(module_all_rules[mod])
+all_inputs = list(set(all_inputs))
+
+rule all:
+    input:
+        all_inputs
+    default_target: True

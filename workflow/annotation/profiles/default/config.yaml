@@ -1,0 +1,10 @@
+set-resources:
+    train_celltypist_model:
+        mem_mb: 50000
+        runtime: 180
+        cpus: 1
+    annotate_with_celltypist:
+        mem_mb: 50000
+        runtime: 180
+        cpus: 1
+

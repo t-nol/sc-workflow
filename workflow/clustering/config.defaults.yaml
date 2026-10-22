@@ -1,0 +1,12 @@
+clustering:
+  algorithm: leiden # leiden or louvain
+  res: ['0.2','0.4','0.6','0.8','1.0'] # list of resolutions to use for clustering
+  sub_res: null # list of resolutions to use for subclustering of main resolution clusters
+  markers: True
+  top_n: 5
+  enrichment: null # name of tool to compute go terms enrichments
+    # can be : gprofiler
+  user_markers: null
+    # can be a list of yaml files with a dict of genes per cell groups/populations
+  prepro_combos: ['hvg_noint'] #list of featurespace_integrationmethod combos to use when input is from preprocessing module
+    # defaults to hvg subset without batch correction.  
